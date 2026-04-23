@@ -27,7 +27,7 @@ class _InitScreen extends State<InitScreen>{
         child: SafeArea(child:
         SingleChildScrollView(child:
         Column(
-          spacing: 200,
+          spacing: 150,
           children: [
             Container(
               alignment: Alignment.center,
@@ -35,7 +35,7 @@ class _InitScreen extends State<InitScreen>{
             ),
             Container(
                 alignment: Alignment.center,
-                child: TitleApp(text: "Agenda de Contactos", size: 80,)
+                child: TitleApp(text: "Agenda de Contactos", size: 90,)
             ),
             Container(
               alignment: Alignment.center,

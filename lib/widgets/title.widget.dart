@@ -11,5 +11,5 @@ class TitleApp extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Text(text, style: TextStyle( fontSize: size, wordSpacing: 10,  ),);
+  Widget build(BuildContext context) => Text(text, style: TextStyle( fontSize: size, wordSpacing: 10,  ), textAlign: TextAlign.center,);
 }
