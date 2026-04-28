@@ -6,11 +6,13 @@ class AppTheme {
       colorSchemeSeed: Colors.blue,
         textTheme: ThemeData.light().textTheme.apply(
           fontFamily: 'SourceSerif',
+          bodyColor: Colors.black,
         ),
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: Colors.brown.shade200,
       inputDecorationTheme: InputDecorationTheme( border: OutlineInputBorder() ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue.shade200,
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

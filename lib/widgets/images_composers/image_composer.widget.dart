@@ -16,7 +16,7 @@ class ImageComposer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (width != null && height != null ){
+    if ( width != null && height != null ){
       return Image.asset(src, width: width, height: height,);
     } else {
       return Image.asset(src, width: size, height: size,);
