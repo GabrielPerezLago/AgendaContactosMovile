@@ -1,3 +1,4 @@
+import 'package:agenda_contactos/widgets/styles/decoration_bg.wifget.dart';
 import 'package:flutter/material.dart';
 
 class BaseScaffold extends Scaffold {
@@ -5,10 +6,14 @@ class BaseScaffold extends Scaffold {
   Widget child;
   EdgeInsets? padding;
 
+  double opacity;
+  
+  
   BaseScaffold({
     required this.context,
     required this.child,
-    this.padding
+    this.padding,
+    this.opacity = 0.2
   });
 
   @override
@@ -17,7 +22,7 @@ class BaseScaffold extends Scaffold {
     width: double.infinity,
     height: double.infinity,
     decoration: BoxDecoration(
-      image: DecorationImage(image: AssetImage('assets/images/background.jpeg'), fit: BoxFit.cover, opacity: 0.2),
+      image: DecorationBackground(opacity: opacity).decoration(context),
       //color: Colors.white
     ),
     child: CustomPaint(

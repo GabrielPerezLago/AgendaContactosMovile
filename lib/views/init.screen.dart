@@ -35,7 +35,7 @@ class _InitScreen extends State<InitScreen>{
             children: [
               Container(
                 alignment: Alignment.center,
-                child: ImageComposer(src: 'assets/images/logo.png', size: 200,),
+                child: ScreenUtils().LogoInit(context, 200, 200)
               ),
               Container(
                   alignment: Alignment.center,
@@ -45,7 +45,7 @@ class _InitScreen extends State<InitScreen>{
                 alignment: Alignment.center,
                 child: Pill(
                   text: "Entrar",
-                  onClick: () => UTILS.Router(context, SelectDBScreen()),
+                  onClick: () => UTILS.Enrouter(context, SelectDBScreen()),
                   fontSize: 30,
 
                 ),

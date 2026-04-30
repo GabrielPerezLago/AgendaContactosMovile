@@ -1,11 +1,11 @@
-import 'package:agenda_contactos/services/instances/DBInstance.dart';
+import 'package:agenda_contactos/services/instances/SESSION.dart';
 import 'package:agenda_contactos/utils/ScreenUtils.dart';
-import 'package:agenda_contactos/views/agenda.screen.dart';
 import 'package:agenda_contactos/widgets/buttons/pill_icon.widget.dart';
 import 'package:agenda_contactos/widgets/scaffolds/base_scaffold.widget.dart';
 import 'package:agenda_contactos/widgets/texts/title.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SelectDBScreen extends StatefulWidget {
   @override
@@ -18,13 +18,23 @@ class _SelectDBScreen extends State<SelectDBScreen> {
   @override
   Widget build(BuildContext context) =>
       BaseScaffold(
+        opacity: 0.1,
         context: context,
           padding: EdgeInsets.all(0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 300,
             children: [
-              TitleApp(text: "¿Que base de datos Prefiere?", size: 70,),
+              Container(
+                alignment: Alignment.center,
+                child: Column(
+                  spacing: 20,
+                  children: [
+                    TitleApp(text: "Selecciona", size: 100,),
+                    TitleApp(text: "Base de datos", size: 80,),
+                  ],
+                ),
+              ),
               Container(
                 alignment: Alignment.center,
                 child: Row(
@@ -37,7 +47,7 @@ class _SelectDBScreen extends State<SelectDBScreen> {
                       text: "Mongo",
                       onClick: () => {
                         SESSION.instance.setDB("mongo"),
-                        UTILS.RouterReplace(context, AgendaScreen())
+                        context.go('/list')
                       },
                       btnSize: Size(180, 80),
                       fontSize: 30,),
@@ -48,7 +58,7 @@ class _SelectDBScreen extends State<SelectDBScreen> {
                       btnSize: Size(180, 80),
                       onClick: () => {
                         SESSION.instance.setDB("mysql"),
-                        UTILS.RouterReplace(context, AgendaScreen())
+                        context.go('/list')
                       },
                       fontSize: 30,)
                   ],

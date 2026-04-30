@@ -1,4 +1,5 @@
 import 'package:agenda_contactos/views/init.screen.dart';
+import 'package:agenda_contactos/views/router/agenda.router.dart';
 import 'package:flutter/material.dart';
 import './themes/theme.dart';
 void main() {
@@ -11,12 +12,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.LIGHT,
       darkTheme: AppTheme.DARK,
       themeMode: ThemeMode.system,
-      home: InitScreen(),
+      routerConfig: router,
     );
   }
 }

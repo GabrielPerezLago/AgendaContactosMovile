@@ -1,29 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PrimaryScaffold extends Scaffold {
-
-  final BuildContext context;
+class DrawnPainter extends StatelessWidget {
   Widget child;
 
-  PrimaryScaffold({
-    required this.context,
-    required this.child,
+
+  DrawnPainter({
+    super.key,
+    required this.child
   });
 
   @override
-  Widget? get body => Container(
-    width: double.infinity,
-    height: double.infinity,
-    decoration: BoxDecoration(
-      image: DecorationImage(image: AssetImage('assets/images/background.jpeg'), fit: BoxFit.cover, opacity: 0.2),
-      //color: Colors.white
-    ),
-    child: CustomPaint(
-      size: Size.infinite,
-      painter: _BoxPainter(context: context),
-      child: child,
-    ),
+  Widget build(BuildContext context) => SizedBox.expand(
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(80),
+        child: CustomPaint(
+            size: Size.infinite,
+            painter: _BoxPainter(context: context),
+            child: Center(child: this.child,)
+        )
+      ),
   );
+
+
 }
 
 
@@ -46,12 +45,16 @@ class _BoxPainter extends CustomPainter {
     paint.style = PaintingStyle.fill;
 
     path.moveTo(w, h);
-    path.lineTo(w, h*0.6);
+
+    path.lineTo(w, h*0.05);
     path.quadraticBezierTo(
-        w*0.8, h*0.9, //Contol
-        0, h*0.9 //Final
+        w*0.7, h*0.15,
+        0, h*0.05
     );
+    path.lineTo(0, h*0.05);
     path.lineTo(0, h);
+
+
 
 
     path.close();
