@@ -1,5 +1,5 @@
 class Contacto {
-  String id;
+  String? id;
   String nombre;
   String? apellidos;
   String email;
@@ -25,4 +25,12 @@ class Contacto {
       direccion: json['direccion']
     );
   }
+
+  get getNombre => this.nombre;
+
+
+
+
+  @override
+  String toString() => "Id: ${id} Nombre : ${nombre}, Apellidos: ${apellidos}, Email: ${email}, Telefono: ${telefono}, Direccion: ${direccion}";
 }

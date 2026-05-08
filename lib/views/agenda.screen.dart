@@ -1,4 +1,4 @@
-import 'package:agenda_contactos/services/instances/SESSION.dart';
+import 'package:agenda_contactos/models/SESSION.dart';
 import 'package:agenda_contactos/utils/ScreenUtils.dart';
 import 'package:agenda_contactos/widgets/images_composers/image_composer.widget.dart';
 import 'package:agenda_contactos/widgets/scaffolds/drawn_scene.widget.dart';
@@ -20,7 +20,7 @@ class AgendaScreen extends StatefulWidget {
 
 class _AgendaScreen extends State<AgendaScreen> {
   int page = 0;
-  final routes = ['/list', '/create'];
+  final routes = ['/list', '/create', '/search'];
 
   void onRouter(int i) {
     setState(() => page = i);
@@ -39,6 +39,7 @@ class _AgendaScreen extends State<AgendaScreen> {
       ),
 
       Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: true,
           elevation: 0,
@@ -52,7 +53,7 @@ class _AgendaScreen extends State<AgendaScreen> {
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: ImageComposer(
-                  src: SESSION.instance.getDB() == "mongo"
+                  src: SESSIONDATA.instance.getDB() == "mongo"
                       ? "assets/images/mongo.png"
                       : "assets/images/mysql.png",
                   height: 50,
@@ -84,6 +85,7 @@ class _AgendaScreen extends State<AgendaScreen> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.list),   label: page == 0 ? "Contactos" : ""),
             BottomNavigationBarItem(icon: Icon(Icons.add_circle),    label: page == 1 ? "Añadir" : ""),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: page == 2 ? 'Buscar' : "")
           ],
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:agenda_contactos/services/interfaces/HTTPService.dart';
 
 class MongoService  {
   final _HTTP = HttpService();
-  static final String DB = "mongo";
+  static final String _DB = "mongo";
 
-  Future<List<Contacto>> getContactos() async => await _HTTP.GET(DB);
+  Future<List<Contacto>> getContactos() async => await _HTTP.GET(_DB);
 }

@@ -1,4 +1,4 @@
-import 'package:agenda_contactos/services/instances/SESSION.dart';
+import 'package:agenda_contactos/models/SESSION.dart';
 import 'package:agenda_contactos/utils/ScreenUtils.dart';
 import 'package:agenda_contactos/widgets/buttons/pill_icon.widget.dart';
 import 'package:agenda_contactos/widgets/scaffolds/base_scaffold.widget.dart';
@@ -45,9 +45,9 @@ class _SelectDBScreen extends State<SelectDBScreen> {
                       iconHeight: 40,
                       iconWidth: 40,
                       text: "Mongo",
-                      onClick: () => {
-                        SESSION.instance.setDB("mongo"),
-                        context.go('/list')
+                      onClick: () {
+                        SESSIONDATA.instance.setDB("mongo");
+                        context.go('/list');
                       },
                       btnSize: Size(180, 80),
                       fontSize: 30,),
@@ -56,9 +56,9 @@ class _SelectDBScreen extends State<SelectDBScreen> {
                       iconWidth: 40,
                       text: "Mysql",
                       btnSize: Size(180, 80),
-                      onClick: () => {
-                        SESSION.instance.setDB("mysql"),
-                        context.go('/list')
+                      onClick: () {
+                        SESSIONDATA.instance.setDB("mysql");
+                        context.go('/list');
                       },
                       fontSize: 30,)
                   ],

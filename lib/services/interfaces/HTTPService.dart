@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:agenda_contactos/models/Contacto.dart';
 import 'package:http/http.dart' as http;
 class HttpService {
-  static final String _URL = "http://localhost:3000/";
+  static final String _URL = "http://192.168.68.103:3000";
 
 
   Future<List<Contacto>> GET(String db) async {
@@ -19,8 +19,10 @@ class HttpService {
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.body);
       return data.map((contacto) => Contacto.fromJson(contacto)).toList();
-    } else {
+    } else if (response.statusCode == 400) {
       throw Exception("400");
+    } else {
+      throw Exception(response.body);
     }
   }
 

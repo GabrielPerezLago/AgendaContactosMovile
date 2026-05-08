@@ -1,3 +1,4 @@
+import 'package:agenda_contactos/widgets/cards/compress_card.widget.dart';
 import 'package:agenda_contactos/widgets/images_composers/image_composer.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,4 +12,5 @@ class ScreenUtils {
     width: width,
     height: height,
   );
+
 }
