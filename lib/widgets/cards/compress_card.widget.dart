@@ -9,6 +9,8 @@ class CompressCard extends StatelessWidget {
   String text;
   double? iconSize;
   double textSize;
+  VoidCallback? onClick;
+  final bool hideIcon;
 
   CompressCard({
     required this.width,
@@ -16,6 +18,8 @@ class CompressCard extends StatelessWidget {
     required this.text,
     this.iconSize = 65,
     this.textSize = 40,
+    this.onClick,
+    this.hideIcon = false ,
   });
 
   @override
@@ -32,11 +36,21 @@ class CompressCard extends StatelessWidget {
       ]
     ),
     child: Row(
-      spacing: 30,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Icon(Icons.account_circle, color: Colors.black,size: iconSize),
-        TitleApp(text: text, size: textSize, color: Colors.black,)
+          Row(
+          spacing: 30,
+          children: [
+            Icon(Icons.account_circle, color: Colors.black,size: iconSize),
+            TitleApp(text: text, size: textSize, color: Colors.black,)
+          ],),
+        Row(
+          children: [
+            if(!hideIcon) IconButton(onPressed: onClick, icon: Icon(Icons.delete, color: Colors.red,))
+
+          ],
+        )
       ],
-    ),
+    )
   ),);
 }

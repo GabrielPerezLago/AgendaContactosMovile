@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 class HttpService {
   static final String _URL = "http://192.168.68.103:3000";
 
-
   Future<List<Contacto>> GET(String db) async {
     final URI = Uri.parse('$_URL/$db/contactos');
 
@@ -25,5 +24,78 @@ class HttpService {
       throw Exception(response.body);
     }
   }
+
+  Future<Map<String, List<String>>> CREATE(String db, Contacto contacto) async {
+    final URI = Uri.parse('$_URL/$db/contactos/create');
+
+
+    final res = await http.post(
+      URI,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: jsonEncode({
+        'nombre': contacto.nombre,
+        'apellidos': contacto.apellidos ?? "",
+        'email': contacto.email,
+        'telefono': contacto.telefono,
+        'direccion': contacto.direccion ?? " , "
+      })
+    ).timeout(Duration(seconds: 7));
+
+    print(res.statusCode);
+    print(res.body);
+
+    if (res.statusCode == 201) {
+
+      return {
+        'success' : [res.body]
+      };
+
+    } else if (res.statusCode == 400) {
+      final Map<String, dynamic> errList = jsonDecode(res.body);
+
+      return {
+        'error' : _errorDecode(errList)
+      };
+
+    } else {
+      throw Exception(res.body);
+    }
+
+  }
+
+  Future<Map<String, String>> DELETE(String db, String telefono) async {
+    final URI = Uri.parse('$_URL/$db/contactos/delete');
+
+    final response = await http.delete(
+      URI,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: jsonEncode({
+        'telefono': telefono
+      })
+    );
+
+    if (response.statusCode == 204) {
+      return { 'success' : response.body };
+    } else if (response.statusCode == 404) {
+      return { 'error' : response.body };
+    } else {
+      throw Exception(response.body);
+    }
+  }
+
+  List<String> _errorDecode(Map<String, dynamic> jsonDecoded) {
+    List<String> data = [];
+    
+    jsonDecoded.forEach((key, value){
+      data.add(value.toString());
+    });
+
+    return data;
+  }
+
 
 }
