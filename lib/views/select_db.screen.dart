@@ -47,7 +47,7 @@ class _SelectDBScreen extends State<SelectDBScreen> {
                       text: "Mongo",
                       onClick: () {
                         SESSIONDATA.instance.setDB("mongo");
-                        context.go('/list');
+                        context.go('/search');
                       },
                       btnSize: Size(180, 80),
                       fontSize: 30,),
@@ -58,7 +58,7 @@ class _SelectDBScreen extends State<SelectDBScreen> {
                       btnSize: Size(180, 80),
                       onClick: () {
                         SESSIONDATA.instance.setDB("mysql");
-                        context.go('/list');
+                        context.go('/search');
                       },
                       fontSize: 30,)
                   ],

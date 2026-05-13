@@ -17,5 +17,5 @@ class MySqlService {
    * @return { List -> String }
    */
   Future<Map<String, List<String>>> createContactos(Contacto c) async => await _HTTP.CREATE(_DB, c);
-  Future<Map<String, String>> deleteContacto(String tlf) async => await _HTTP.DELETE(_DB, tlf);
+  Future<int> deleteContacto(String tlf) async => await _HTTP.DELETE(_DB, tlf);
 }

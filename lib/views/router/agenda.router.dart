@@ -18,17 +18,17 @@ final GoRouter router = GoRouter(
     },
     routes: [
       GoRoute(
-        path: '/list',
-        builder: (context, state) => ListLayout()
+          path: '/search',
+          builder: (context,state ) => SearchLayout()
       ),
       GoRoute(
           path: '/create',
           builder: (context, state) => CreateLayout()
       ),
       GoRoute(
-        path: '/search',
-        builder: (context,state ) => SearchLayout()
-      )
+          path: '/list',
+          builder: (context, state) => ListLayout()
+      ),
     ]
     ),
 ]

@@ -20,7 +20,7 @@ class AgendaScreen extends StatefulWidget {
 
 class _AgendaScreen extends State<AgendaScreen> {
   int page = 0;
-  final routes = ['/list', '/create', '/search'];
+  final routes = ['/search', '/create', '/list'];
 
   void onRouter(int i) {
     setState(() => page = i);
@@ -83,9 +83,9 @@ class _AgendaScreen extends State<AgendaScreen> {
           selectedIconTheme: CupertinoIconThemeData(size: 30),
           selectedFontSize: 20,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.list),   label: page == 0 ? "Contactos" : ""),
-            BottomNavigationBarItem(icon: Icon(Icons.add_circle),    label: page == 1 ? "Añadir" : ""),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: page == 2 ? 'Buscar' : "")
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: page == 0 ? "Buscar" : ""),
+            BottomNavigationBarItem(icon: Icon(Icons.add_circle),  label: page == 1 ? "Añadir" : ""),
+            BottomNavigationBarItem(icon: Icon(Icons.list), label: page == 2 ? 'Contactos' : "")
           ],
         ),
       ),

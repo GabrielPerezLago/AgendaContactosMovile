@@ -17,7 +17,7 @@ class ContactosController {
         nombre: params["nombre"] ?? "",
         apellidos: params["apellidos"] ?? null,
         email: params["email"] ?? "",
-        telefono: params["telefono"] ?? "",
+        telefono: params["telefono"].toString().replaceAll(" ", "") ?? "",
         direccion: params["direccion"] != "" ?  params["direccion"] : null
       );
       
@@ -36,8 +36,8 @@ class ContactosController {
   }
 
 
-  Future<Map<String, String>> deleteContacto(String tlf) async {
-      final Map<String, String> res = await ( SESSIONDATA.instance.getDB() == 'mongo' ? _mongo.deleteContacto(tlf) : _mysql.deleteContacto(tlf));
+  Future<int> deleteContacto(String tlf) async {
+      final int res = await ( SESSIONDATA.instance.getDB() == 'mongo' ? _mongo.deleteContacto(tlf) : _mysql.deleteContacto(tlf));
       return res;
   }
 

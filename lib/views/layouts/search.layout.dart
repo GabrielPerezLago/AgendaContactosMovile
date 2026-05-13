@@ -1,3 +1,4 @@
+import 'package:agenda_contactos/controllers/ContactosController.dart';
 import 'package:agenda_contactos/models/Contacto.dart';
 import 'package:agenda_contactos/models/SESSION.dart';
 import 'package:agenda_contactos/utils/AppUtils.dart';
@@ -14,20 +15,21 @@ class SearchLayout extends StatefulWidget {
 
 class _SearchLayout extends State<SearchLayout> {
   final _utils = AppUtils();
+  final _controller = ContactosController();
   TextEditingController serchController = TextEditingController();
   List<Contacto> _contactos = [];
-  List<Widget> _cards = [];
+
 
   @override
   void initState() {
     _loadData();
   }
 
-  void _loadData() {
+  void _loadData() async {
     try {
-      _contactos = SESSIONDATA.instance.getContactosInstance();
+      final data = await SESSIONDATA.instance.getContactosHtttp();
       setState(() {
-        _cards = _utils.compressCardComposer(_contactos);
+        _contactos = data;
       });
     } catch (ex) {
       print(ex);
@@ -51,15 +53,23 @@ class _SearchLayout extends State<SearchLayout> {
           Expanded(
               child: SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.symmetric( vertical: 30),
+                    padding: EdgeInsets.symmetric( vertical: 5),
                     alignment: Alignment.center,
                     child: Column(
                       spacing: 20,
-                      children: _cards,
+                      children: _contactos.map((contacto) {
+                        return _utils.singleCompressCardString(contacto.nombre, () async {
+                          print(contacto.telefono);
+                          final response = await _controller.deleteContacto(contacto.telefono.replaceAll(" ", ""));
+
+                          if (response == 204) setState(() {
+                            _contactos.remove(contacto);
+                          });
+                        });
+                      }).toList(),
                     ),
-                  )
-              )
-          )
+              ),
+          ))
         ],
       ),
     ));
@@ -69,9 +79,9 @@ class _SearchLayout extends State<SearchLayout> {
     final filter = _contactos.where((contacto) {
       return contacto.nombre.toLowerCase().contains(data.toLowerCase());
     }).toList();
-
+    if (filter.isEmpty) _loadData();
     setState(() {
-      _cards = _utils.compressCardComposer(filter);
+      _contactos = filter;
     });
   }
 }

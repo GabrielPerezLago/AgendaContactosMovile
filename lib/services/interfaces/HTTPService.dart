@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:agenda_contactos/models/Contacto.dart';
 import 'package:http/http.dart' as http;
 class HttpService {
-  static final String _URL = "http://192.168.68.103:3000";
+  static final String _URL = "http://192.168.68.104:3000";
 
   Future<List<Contacto>> GET(String db) async {
     final URI = Uri.parse('$_URL/$db/contactos');
@@ -49,7 +50,7 @@ class HttpService {
     if (res.statusCode == 201) {
 
       return {
-        'success' : [res.body]
+        'success' : ['Contacto Insertado en tu agenda correctamente']
       };
 
     } else if (res.statusCode == 400) {
@@ -65,9 +66,8 @@ class HttpService {
 
   }
 
-  Future<Map<String, String>> DELETE(String db, String telefono) async {
+  Future<int> DELETE(String db, String telefono) async {
     final URI = Uri.parse('$_URL/$db/contactos/delete');
-
     final response = await http.delete(
       URI,
       headers: {
@@ -79,9 +79,9 @@ class HttpService {
     );
 
     if (response.statusCode == 204) {
-      return { 'success' : response.body };
+      return 204;
     } else if (response.statusCode == 404) {
-      return { 'error' : response.body };
+      return 400;
     } else {
       throw Exception(response.body);
     }
