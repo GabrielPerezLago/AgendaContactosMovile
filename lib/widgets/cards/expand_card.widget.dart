@@ -7,10 +7,11 @@ class ExpandCard extends StatelessWidget {
 
   static final _black = Colors.black;
   final Contacto contacto;
+  final VoidCallback onClick;
 
   late final double screenWidth = MediaQuery.of(context).size.width;
 
-  ExpandCard({ required this.context,  required this.contacto });
+  ExpandCard({ required this.context,  required this.contacto ,required this.onClick});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -37,6 +38,7 @@ class ExpandCard extends StatelessWidget {
         Text(contacto.email.toUpperCase(), style: TextStyle(color: _black),),
         Text(contacto.telefono, style: TextStyle(color: _black),),
         if (!_isDirectionEmpty(contacto.direccion!)) Text(contacto.direccion!.toLowerCase(), style: TextStyle(color: _black),),
+        IconButton(onPressed: onClick, icon: Icon(Icons.delete, color: Colors.red,))
       ],
     ),
   );

@@ -75,7 +75,7 @@ class _SearchLayout extends State<SearchLayout> {
                                 _expandedIndex = index;
                               }
                             });},
-                          child: isExpand ? ExpandCard(context: context, contacto: contacto,) : CompressCard(width: 420, height: 100, text: contacto.nombre, onClick: _deleteContacto(contacto),)
+                          child: isExpand ? ExpandCard(context: context, contacto: contacto, onClick: _deleteContacto(contacto),) : CompressCard(width: 420, height: 100, text: contacto.nombre.toUpperCase(), onClick: _deleteContacto(contacto),)
                         );
 
                       }).toList(),
