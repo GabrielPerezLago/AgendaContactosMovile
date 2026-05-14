@@ -3,6 +3,7 @@ import 'package:agenda_contactos/models/Contacto.dart';
 import 'package:agenda_contactos/models/SESSION.dart';
 import 'package:agenda_contactos/utils/AppUtils.dart';
 import 'package:agenda_contactos/widgets/cards/compress_card.widget.dart';
+import 'package:agenda_contactos/widgets/cards/expand_card.widget.dart';
 import 'package:agenda_contactos/widgets/inputs/textfield.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class _SearchLayout extends State<SearchLayout> {
   final _controller = ContactosController();
   TextEditingController serchController = TextEditingController();
   List<Contacto> _contactos = [];
+
+  int? _expandedIndex;
 
 
   @override
@@ -53,23 +56,32 @@ class _SearchLayout extends State<SearchLayout> {
           Expanded(
               child: SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.symmetric( vertical: 5),
+                    padding: EdgeInsets.symmetric( vertical: 20),
                     alignment: Alignment.center,
                     child: Column(
                       spacing: 20,
-                      children: _contactos.map((contacto) {
-                        return _utils.singleCompressCardString(contacto.nombre, () async {
-                          print(contacto.telefono);
-                          final response = await _controller.deleteContacto(contacto.telefono.replaceAll(" ", ""));
+                      children: _contactos.asMap().entries.map((entry) {
+                        final index = entry.key;
+                        final contacto = entry.value;
 
-                          if (response == 204) setState(() {
-                            _contactos.remove(contacto);
-                          });
-                        });
+                        final isExpand = _expandedIndex == index;
+
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (_expandedIndex == index) {
+                                _expandedIndex = null;
+                              } else {
+                                _expandedIndex = index;
+                              }
+                            });},
+                          child: isExpand ? ExpandCard(context: context, contacto: contacto,) : CompressCard(width: 420, height: 100, text: contacto.nombre, onClick: _deleteContacto(contacto),)
+                        );
+
                       }).toList(),
                     ),
               ),
-          ))
+          )),
         ],
       ),
     ));
@@ -83,5 +95,15 @@ class _SearchLayout extends State<SearchLayout> {
     setState(() {
       _contactos = filter;
     });
+  }
+
+  VoidCallback _deleteContacto(Contacto contacto) {
+    return () async{
+      final response = await _controller.deleteContacto(contacto.telefono.replaceAll(" ", ""));
+
+      if (response == 204) setState(() {
+        _contactos.remove(contacto);
+      });
+    };
   }
 }

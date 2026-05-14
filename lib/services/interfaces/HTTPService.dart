@@ -4,7 +4,7 @@ import 'dart:ffi';
 import 'package:agenda_contactos/models/Contacto.dart';
 import 'package:http/http.dart' as http;
 class HttpService {
-  static final String _URL = "http://192.168.68.104:3000";
+  static final String _URL = "http://172.30.1.21:3000";
 
   Future<List<Contacto>> GET(String db) async {
     final URI = Uri.parse('$_URL/$db/contactos');
@@ -43,9 +43,6 @@ class HttpService {
         'direccion': contacto.direccion ?? " , "
       })
     ).timeout(Duration(seconds: 7));
-
-    print(res.statusCode);
-    print(res.body);
 
     if (res.statusCode == 201) {
 
