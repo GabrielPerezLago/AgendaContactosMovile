@@ -1,21 +1,20 @@
 import 'package:agenda_contactos/controllers/ContactosController.dart';
 import 'package:agenda_contactos/models/Contacto.dart';
 import 'package:agenda_contactos/models/SESSION.dart';
-import 'package:agenda_contactos/utils/AppUtils.dart';
 import 'package:agenda_contactos/widgets/cards/compress_card.widget.dart';
 import 'package:agenda_contactos/widgets/cards/expand_card.widget.dart';
 import 'package:agenda_contactos/widgets/inputs/textfield.widget.dart';
+import 'package:agenda_contactos/widgets/mini_views/contactos_empty.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper_view/flutter_swiper_view.dart';
-
+import 'package:go_router/go_router.dart';
 class SearchLayout extends StatefulWidget {
   @override
   State<SearchLayout> createState() => _SearchLayout();
 }
 
 class _SearchLayout extends State<SearchLayout> {
-  final _utils = AppUtils();
+  bool isLoading = true;
   final _controller = ContactosController();
   TextEditingController serchController = TextEditingController();
   List<Contacto> _contactos = [];
@@ -33,15 +32,25 @@ class _SearchLayout extends State<SearchLayout> {
       final data = await SESSIONDATA.instance.getContactosHtttp();
       setState(() {
         _contactos = data;
+        isLoading = false;
       });
     } catch (ex) {
+      context.go("/error");
       print(ex);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Container(
+
+    if(isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    return SafeArea(child: _contactos.isNotEmpty ?
+    Container(
       padding: EdgeInsets.symmetric(vertical: 100),
       alignment: Alignment.center,
       child: Column(
@@ -75,7 +84,7 @@ class _SearchLayout extends State<SearchLayout> {
                                 _expandedIndex = index;
                               }
                             });},
-                          child: isExpand ? ExpandCard(context: context, contacto: contacto, onClick: _deleteContacto(contacto),) : CompressCard(width: 420, height: 100, text: contacto.nombre.toUpperCase(), onClick: _deleteContacto(contacto),)
+                          child: isExpand ? ExpandCard(context: context, contacto: contacto, onClick: _deleteContacto(contacto),) : CompressCard(width: 420, height: 80, text: contacto.nombre.toUpperCase(), onClick: _deleteContacto(contacto),)
                         );
 
                       }).toList(),
@@ -84,7 +93,9 @@ class _SearchLayout extends State<SearchLayout> {
           )),
         ],
       ),
-    ));
+    ) : //else
+      EmptyData()
+    );
   }
 
   void _search(String data) {

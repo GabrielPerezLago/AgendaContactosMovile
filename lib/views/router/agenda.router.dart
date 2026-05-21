@@ -1,6 +1,7 @@
 import 'package:agenda_contactos/views/agenda.screen.dart';
 import 'package:agenda_contactos/views/init.screen.dart';
 import 'package:agenda_contactos/views/layouts/create_contacto.layout.dart';
+import 'package:agenda_contactos/views/layouts/error.layout.dart';
 import 'package:agenda_contactos/views/layouts/list.layout.dart';
 import 'package:agenda_contactos/views/layouts/search.layout.dart';
 import 'package:go_router/go_router.dart';
@@ -29,6 +30,10 @@ final GoRouter router = GoRouter(
           path: '/list',
           builder: (context, state) => ListLayout()
       ),
+      GoRoute(
+          path: '/error',
+          builder: (context, state) => ErrorLayout()
+      )
     ]
     ),
 ]

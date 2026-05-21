@@ -16,8 +16,8 @@ class CompressCard extends StatelessWidget {
     required this.width,
     required this.height,
     required this.text,
-    this.iconSize = 65,
-    this.textSize = 40,
+    this.iconSize = 45,
+    this.textSize = 20,
     this.onClick,
     this.hideIcon = false ,
   });

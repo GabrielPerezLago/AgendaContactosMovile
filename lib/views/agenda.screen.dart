@@ -20,7 +20,7 @@ class AgendaScreen extends StatefulWidget {
 
 class _AgendaScreen extends State<AgendaScreen> {
   int page = 0;
-  final routes = ['/search', '/create', '/list'];
+  final routes = ['/search', '/create', '/list', '/error'];
 
   void onRouter(int i) {
     setState(() => page = i);

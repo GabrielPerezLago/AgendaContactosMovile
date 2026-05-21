@@ -33,11 +33,11 @@ class ExpandCard extends StatelessWidget {
       spacing: 10,
       children: [
         Icon(Icons.account_circle, size: 90, color: Colors.black,),
-        Text(contacto.nombre.toUpperCase(), style: TextStyle(color: _black),),
-        if (contacto.apellidos != null && contacto.apellidos != "") Text(contacto.apellidos!.toUpperCase(), style: TextStyle(color: _black),),
-        Text(contacto.email.toUpperCase(), style: TextStyle(color: _black),),
-        Text(contacto.telefono, style: TextStyle(color: _black),),
-        if (!_isDirectionEmpty(contacto.direccion!)) Text(contacto.direccion!.toLowerCase(), style: TextStyle(color: _black),),
+        Text(contacto.nombre.toUpperCase(), style: TextStyle(color: _black , fontSize: 30),),
+        if (contacto.apellidos != null && contacto.apellidos != "") Text(contacto.apellidos!.toUpperCase(), style: TextStyle(color: _black, fontSize: 20),),
+        Text(contacto.email, style: TextStyle(color: _black,  fontSize: 20),),
+        Text(contacto.telefono, style: TextStyle(color: _black,  fontSize: 20),),
+        if (!_isDirectionEmpty(contacto.direccion!)) Text(contacto.direccion!.toLowerCase(), style: TextStyle(color: _black,  fontSize: 20),),
         IconButton(onPressed: onClick, icon: Icon(Icons.delete, color: Colors.red,))
       ],
     ),

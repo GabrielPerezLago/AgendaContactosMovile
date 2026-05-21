@@ -75,6 +75,8 @@ flutter:
     - assets/images/logo_light.png
     - assets/images/logo_dark.png
     - assets/images/logo_app.png
+    - assets/images/stickman.png
+    - assets/images/lost_conect.png
   fonts:
     - family: SourceSerif
       fonts:

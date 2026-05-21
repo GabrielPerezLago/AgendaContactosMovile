@@ -19,6 +19,7 @@ class AppUtils {
                 width: 420,
                 height: 100,
                 text: contacto.value.nombre.toUpperCase(),
+                hideIcon: true,
                 onClick: () {
                   _controller.deleteContacto(contacto.value.telefono);
                 },

@@ -2,11 +2,13 @@ import 'package:agenda_contactos/controllers/ContactosController.dart';
 import 'package:agenda_contactos/models/Contacto.dart';
 import 'package:agenda_contactos/models/SESSION.dart';
 import 'package:agenda_contactos/utils/AppUtils.dart';
+import 'package:agenda_contactos/widgets/mini_views/contactos_empty.widget.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:agenda_contactos/widgets/cards/compress_card.widget.dart';
 import 'package:agenda_contactos/widgets/texts/title.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ListLayout extends StatefulWidget {
 
@@ -38,10 +40,8 @@ class _ListLayout extends State<ListLayout> {
       });
 
     } catch (ex) {
+      context.go("/error");
       print(ex);
-      setState(() {
-        isLoading = false;
-      });
     }
   }
 
@@ -53,7 +53,7 @@ class _ListLayout extends State<ListLayout> {
       );
     }
 
-    return Container(
+    return _contactos.length > 0 ? Container(
       padding: EdgeInsets.symmetric(vertical: 20),
         alignment: Alignment.center,
         child: SafeArea(child: SingleChildScrollView(
@@ -76,7 +76,8 @@ class _ListLayout extends State<ListLayout> {
           )
         ),
         )
-    );
+    ) : //else
+    EmptyData() ;
   }
 
 }

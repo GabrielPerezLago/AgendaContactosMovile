@@ -32,7 +32,9 @@ class _CreateLayout extends State<CreateLayout> {
           children: [
             TitleApp(
               text: "Añadir Contacto",
-              size: 70,),
+              size: 70,
+              color: Theme.of(context).primaryColorLight,
+            ),
             Input(
                 controller: _tlfController,
                 inputTittle: "Telefono *",
